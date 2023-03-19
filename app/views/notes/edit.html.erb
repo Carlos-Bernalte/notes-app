@@ -1,0 +1,49 @@
+<div>
+      <div class="x_panel">
+        <h2 style="margin: 9px 0">Note_name / Edit </h2> 
+      </div>                
+
+  <!-- /Row with title -->
+  <div class="row center">
+    <%= form_with(scope: :note, model: [ :user, @note ], class: 'col-xs-6', local: true) do |form| %>
+    <% if @note.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2>
+        <%= pluralize(@note.errors.count, "error") %> prohibited
+        this note from being saved:
+      </h2>
+      <ul>
+        <% @note.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title%>
+    </p>
+
+    <p>
+      <%= form.label :text %><br>
+      <%= form.text_area :text, style: 'height: 200px' %>
+    </p>
+
+    <p>
+      <%= form.label :image %><br>
+      <%= image_tag(@note.image.url, alt: 'Image', style: 'padding-bottom: 1rem;') if @note.image? %>
+      <%= form.file_field :image%>
+    </p>
+    <br>
+    <div class="row" style="padding-left:25px; padding-right: 25px ">
+      <%= form.submit class:"btn btn-info" %>
+      <%= link_to 'Back', user_notes_url(params[:user_id]), class: 'btn btn-info' %>
+    </div>
+
+    <% end %>
+     
+  </div>
+ 
+</div>
+

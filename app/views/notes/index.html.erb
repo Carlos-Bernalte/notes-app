@@ -1,0 +1,17 @@
+<% if !logged? %>
+  <%= controller.redirect_to root_path %>
+<% else %>
+
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Notes</h1>
+  <% notes = find_notes(params[:user_id]) %>    
+  <% notes.each_pair do |user_id, user_notes| %>
+  <div id="notes">
+    <% user_notes.each do |note|%>
+      <%= render note %>
+    <% end %>
+  </div>
+  <% end %>
+  <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url, class: "btn btn-secondary" %>
+<% end %>
