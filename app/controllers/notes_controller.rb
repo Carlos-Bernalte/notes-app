@@ -1,15 +1,15 @@
 class NotesController < ApplicationController
-  # before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :destroy, only: %i[destroy ]
 
   # GET /notes
   def index
-    puts "----> GET /notes"
+    puts "-------------------------------GET NOTES----------------"
     @notes = Note.all
   end
 
   # GET /notes/1
   def show
-    puts "----> GET /note"
+    puts "-------------------------------GET NOTE----------------"
     @note = Note.find(params[:id])
   end
 
@@ -40,9 +40,11 @@ class NotesController < ApplicationController
 
   # PATCH/PUT /notes/1
   def update
+    puts "-------------------------------UPDATE NOTE----------------"
     if logged?
-      @note = Note.find(params[:id])
 
+      @note = Note.find(params[:id])
+      
       if @note.update(note_params)
         redirect_to user_notes_url(@note.user_id)
       else
@@ -53,7 +55,7 @@ class NotesController < ApplicationController
 
   # DELETE /notes/1
   def destroy
-    puts "Note was successfully deleted"
+    puts "-------------------------------DELETE NOTE----------------"
     if logged?
       @note = Note.find(params[:id])
       @user = User.find(@note.user_id)
@@ -65,12 +67,11 @@ class NotesController < ApplicationController
 
   private
 
-
     # Only allow a list of trusted parameters through.
     def note_params
       params.require(:note).permit(:title, :text, :image)
     end
     def logged?
-      session[:user_name]
+      session[:username]
     end
 end

@@ -1,9 +1,53 @@
-<h1>New note</h1>
+<% if !logged? %>
+<%= controller.redirect_to root_path %>
+<% else %>
+<div class="col-md-9 col-lg-9 right_col">
+  <!-- Row with title -->
+  <div class="row page-title">
+    <div class="title_left">
+      <div class="x_panel">
+        <h2 >Create note</h2> 
+      </div>                
+    </div>
+  </div>
+  <!-- /Row with title -->
+  <% if @note.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <h2>
+      <%= pluralize(@note.errors.count, "error") %> prohibited
+      this note from being saved:
+    </h2>
+    <ul>
+      <% @note.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+  <div>
+    <%= form_with scope: :note, model: [ :user, @note ], local: true do |form| %>
+    <p>
+      <%= form.label :title %><br>
+      <%= form.text_field :title%>
+    </p>
 
-<%= render "form", note: @note %>
+    <p>
+      <%= form.label :text %><br>
+      <%= form.text_area :text, style: 'height: 200px'%>
+    </p>
 
-<br>
+    <p>
+      <%= form.label :image %><br>
+      <%= form.file_field :image %>
+    </p>
+    <br>
+    <div>
+      <%= form.submit class:"btn btn-info" %>
+      <%= link_to 'Back', :back, class: 'btn btn-info' %>
+    </div>
 
-<div>
-  <%= link_to "Back to notes", user_notes_path %>
+    <% end %>
+
+  </div>
 </div>
+<% end %>

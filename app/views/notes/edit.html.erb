@@ -1,11 +1,14 @@
-<div>
+<div class="col-md-9 col-lg-9 right_col">
+  <div class="row page-title">
+    <div class="title_left">
       <div class="x_panel">
-        <h2 style="margin: 9px 0">Note_name / Edit </h2> 
+        <h2 >Edit note</h2> 
       </div>                
-
+    </div>
+  </div>              
   <!-- /Row with title -->
-  <div class="row center">
-    <%= form_with(scope: :note, model: [ :user, @note ], class: 'col-xs-6', local: true) do |form| %>
+  <div>
+    <%= form_with(scope: :note, model: [ :user, @note ], local: true) do |form| %>
     <% if @note.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
       <h2>
@@ -32,13 +35,13 @@
 
     <p>
       <%= form.label :image %><br>
-      <%= image_tag(@note.image.url, alt: 'Image', style: 'padding-bottom: 1rem;') if @note.image? %>
+      <%# <%= image_tag(@note.image, alt: 'Image', style: 'padding-bottom: 1rem;') if @note.image? %> %>
       <%= form.file_field :image%>
     </p>
     <br>
-    <div class="row" style="padding-left:25px; padding-right: 25px ">
+    <div>
       <%= form.submit class:"btn btn-info" %>
-      <%= link_to 'Back', user_notes_url(params[:user_id]), class: 'btn btn-info' %>
+      <%= link_to 'Back', :back, class: 'btn btn-info' %>
     </div>
 
     <% end %>

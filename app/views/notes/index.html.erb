@@ -1,17 +1,40 @@
 <% if !logged? %>
   <%= controller.redirect_to root_path %>
 <% else %>
-
   <p style="color: green"><%= notice %></p>
-
   <h1>Notes</h1>
+   <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url, class: "btn btn-secondary" %>
+   <div class="contenedor">
   <% notes = find_notes(params[:user_id]) %>    
   <% notes.each_pair do |user_id, user_notes| %>
-  <div id="notes">
-    <% user_notes.each do |note|%>
-      <%= render note %>
+  <div class="contenedor-notes">
+    <% user_notes.each do |note| %>
+      <div id="<%= dom_id note %>" class="note" style="width: 18rem;">
+        <div class="card-body">
+            <% if note.image%>
+              <img src="..." class="card-img-top" alt="...">
+            <% end %>  
+          <h3 class="note-title">
+            <%= note.title %>
+          </h3>
+          <p class="note-text">
+            <%= note.text %>
+          </p>
+          <br>
+          <div class="row" style="padding-left:20px; padding-right: 20px ">
+            <div>
+              <%= link_to '<i class="fa fa-gear"></i>'.html_safe, { controller: "notes", action: "edit", id: note }, class: "btn btn-info" %>
+              <%= link_to '<i class="fa fa-share"></i>'.html_safe, { controller: "notes", action: "edit", id: note },  class: 'btn btn-info'%>
+              <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(user_id, note), method: :delete, class: 'btn btn-danger' %>
+              <%# <%= link_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(user_id, note), data: { method: :delete, confirm: 'Are you sure?' } , class: 'btn btn-danger'%>
+              
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </div>
   <% end %>
-  <%= link_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url, class: "btn btn-secondary" %>
+  </div>
+ 
 <% end %>
