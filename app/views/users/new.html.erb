@@ -1,9 +1,47 @@
-<h1>New user</h1>
+<body id="welcome">
+  <header>
+    <div class="center">
+      <h1>Sign Up</h1>
+    </div>
+  </header>
 
-<%= render "form", user: @user %>
+  <div class="row center">
+    <%= form_with scope: :user, class: 'col-xs-6', url: users_path, local: true do |form| %>  
+      <p>
+        <%= form.label :username %><br>
+        <%= form.text_field :username, class: 'col-xs-12' %>
+      </p>
 
-<br>
+      <p>
+        <%= form.label :email %><br>
+        <%= form.text_field :email, class: 'col-xs-12' %>
+      </p>
 
-<div>
-  <%= link_to "Back to users", users_path %>
-</div>
+      <p>
+        <%= form.label :password %><br>
+        <%= form.password_field :password, class: 'col-xs-12' %>
+      </p>
+
+      <p>
+        <%= form.label :confirm_password %><br>
+        <%= form.password_field :password_confirmation, class: 'col-xs-12' %>
+      </p>
+      <p>
+        <%= form.submit 'Sign up' , class: "button-primary"%>
+        <%= link_to 'Back', root_path, class: "button-primary" %>
+      </p>
+
+    <% end %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  </div>
+
+</body>

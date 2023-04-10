@@ -1,14 +1,10 @@
 <% if !logged? %>
 <%= controller.redirect_to root_path %>
 <% else %>
-<div class="col-md-9 col-lg-9 right_col">
+<div >
   <!-- Row with title -->
-  <div class="row page-title">
-    <div class="title_left">
-      <div class="x_panel">
-        <h2 >Create note</h2> 
-      </div>                
-    </div>
+  <div>
+        <h2 >New note</h2>               
   </div>
   <!-- /Row with title -->
   <% if @note.errors.any? %>
@@ -27,23 +23,23 @@
   <div>
     <%= form_with scope: :note, model: [ :user, @note ], local: true do |form| %>
     <p>
-      <%= form.label :title %><br>
-      <%= form.text_field :title%>
+      <h3><%= form.label :title %></h3><br>
+      <%= form.text_field :title, style: 'height: 25px; border-radius: 10px';%>
     </p>
 
     <p>
-      <%= form.label :text %><br>
-      <%= form.text_area :text, style: 'height: 200px'%>
+       <h3><%= form.label :text %></h3><br>
+      <%= form.text_area :text, style: 'height: 200px; border-radius: 10px;'%>
     </p>
 
     <p>
-      <%= form.label :image %><br>
+      <h3><%= form.label :image %></h3><br>
       <%= form.file_field :image %>
     </p>
     <br>
     <div>
-      <%= form.submit class:"btn btn-info" %>
-      <%= link_to 'Back', :back, class: 'btn btn-info' %>
+      <%= form.submit class: "button-primary" %>
+      <%= link_to 'Back', :back, class: "button-primary" %>
     </div>
 
     <% end %>

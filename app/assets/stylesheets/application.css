@@ -1,37 +1,149 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
- .logout {
-    text-align: right;
-    margin-left: 10px;
-    background-color: #007bff;
-    color: #000000;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-.note {
-  background-color: #feefc3;
-  margin: 1rem 1rem 4rem 1rem;
-  border-radius: 5px;
-  box-shadow: 5px 5px 8px grey;
-}
-body {
-	background: #1D202B;
-	color: #fff;
-	font-family: 'Roboto', sans-serif;
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Poppins', sans-serif;
 }
 
+
+body{
+    background-color: #222;
+    color: #ffffff;
+    font: 200 14px 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 200; */  
+}
+
+h2{
+    font-size: 36px;
+    /* line-height: 36px; */
+}
+
+h3{
+    color: #999;
+    font-size: 18px;
+    font-weight: 300;
+}
+p{
+  padding-top: 10px;
+}
+
+.button-primary{
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: #ffc900;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 400;
+  padding: 10px;
+  line-height: 14px;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+.button-primary:any-link{
+  color:#222;
+}
+.button-primary:hover{
+  background-color: #222;
+  color:#ffc900;
+  border:1px solid #ffc900;
+}
+
+.alert-error{
+  padding-top: 10px;
+  color: #d00000;
+}
+
+/* Notes */
+
+.contenedor-notes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px 30px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.note{
+  height: 200px;
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
+
+.add-note{
+  width: 172px;
+  height: 222px;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+  background-color: #ffc900;
+  color: #222;
+  font-size: x-large;
+}
+.add-note:hover{
+  background-color: #222;
+  color:#ffc900;
+  border:1px solid #ffc900;
+}
+.note-title{
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 1rem;
+  border-bottom:1px solid #ffc900;
+}
+
+.note-text{
+  margin: .33rem 0rem 1rem 0rem;
+  height: 100;
+  overflow: hidden;
+}
+
+.notes-options {
+  display: flex;
+  align-items:flex-end;
+  float: right;
+}
+/* Main area */
+#wrapper {
+  display: grid;
+  grid-template-columns: 250px auto;
+  gap: 100px;
+  height: max-content;
+}
+
+#sidebar{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  background-color: #222;
+  border-right:1px solid #ffc900;
+  padding-top: 10px;
+  font-size: 24px;  
+  text-align: center;
+  width: 250px;
+  height:100%;
+}
+#content {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  padding: 40px 0;
+}
+
+#welcome-container{
+  position: relative;
+  border: 1px solid #ffc900;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+#welcome{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding-top: 100px;
+}
+
+/* PRUEBAS */

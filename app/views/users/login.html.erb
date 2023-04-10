@@ -1,5 +1,5 @@
-<body style="background-color: #ECF6FE">
-  <header class="container-fluid">
+<body id="welcome">
+  <header>
     <div class="center">
       <h1>Log in</h1>
     </div>
@@ -8,10 +8,6 @@
     <div>
       <%= form_with class: 'col-xs-6', url: 'login', local: true do |form| %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-        <% flash.each do |key, value| %>
-          <div class="alert alert-<%= key %>"><%= value %></div>
-        <% end %>
 
         <p>
           <%= form.label :username %><br>
@@ -24,9 +20,14 @@
         </p>
 
         <p>
-          <%= form.submit 'Sign in', class: 'btn btn-default with-margin' %>
-          <%= link_to 'Sign up', new_user_path, class: 'btn btn-default with-margin' %>
+          <%= form.submit 'Sign in' , class: "button-primary"%>
+          <%= link_to 'Sign up', new_user_path, class: "button-primary"%>
         </p>
+        <div>
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+        </div>
       <% end %>
 
     </div>

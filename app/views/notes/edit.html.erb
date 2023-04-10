@@ -1,10 +1,6 @@
-<div class="col-md-9 col-lg-9 right_col">
-  <div class="row page-title">
-    <div class="title_left">
-      <div class="x_panel">
+<div >
+  <div>
         <h2 >Edit note</h2> 
-      </div>                
-    </div>
   </div>              
   <!-- /Row with title -->
   <div>
@@ -22,26 +18,24 @@
       </ul>
     </div>
     <% end %>
-
     <p>
-      <%= form.label :title %><br>
-      <%= form.text_field :title%>
+      <h3><%= form.label :title %></h3><br>
+      <%= form.text_field :title, style: 'padding: 5px; height: 25px; border-radius: 10px';%>
     </p>
 
     <p>
-      <%= form.label :text %><br>
-      <%= form.text_area :text, style: 'height: 200px' %>
+       <h3><%= form.label :text %></h3><br>
+      <%= form.text_area :text, style: 'padding: 5px; height: 200px; border-radius: 10px;'%>
     </p>
 
     <p>
-      <%= form.label :image %><br>
-      <%# <%= image_tag(@note.image, alt: 'Image', style: 'padding-bottom: 1rem;') if @note.image? %> %>
-      <%= form.file_field :image%>
+      <h3><%= form.label :image %></h3><br>
+      <%= form.file_field :image %>
     </p>
     <br>
     <div>
-      <%= form.submit class:"btn btn-info" %>
-      <%= link_to 'Back', :back, class: 'btn btn-info' %>
+      <%= form.submit class: "button-primary" %>
+      <%= link_to 'Back', :back, class: "button-primary" %>
     </div>
 
     <% end %>
