@@ -16,5 +16,6 @@ module UsersHelper
   def logged?
     session[:username]
   end
+
 end
   

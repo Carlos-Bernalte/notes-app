@@ -16,28 +16,24 @@
   <div id="sidebar-menu" class="active main_menu_side hidden-print main_menu ">
     <div class="menu_section">
       <ul class="nav side-menu" id="nav-menu">
+        <!-- Edit view -->
+        <li><%= link_to '<i class="fa fa-user"></i> Profile'.html_safe, user_path(user_id)  %></li>
+        <!-- /Edit view -->  
       	<% if user_session_is_admin? %>
 	        <!-- User admin view -->
-	        <li ><%= link_to '<i class="fa fa-sticky-note"></i> Notes list'.html_safe, user_notes_url(user_id) %></li>
           <li ><%= link_to '<i class="fa fa-id-card-o"></i> Admin management'.html_safe, users_path %></li>
-	        <!-- /User admin view -->
-	    <% else %>
-	    	<li ><%= link_to '<i class="fa fa-sticky-note"></i> Notes list'.html_safe, user_notes_url(user_id) %></li>
-	    <% end %>
+	        <!-- /User admin view --> 
+	      <% end %>
+        <li ><%= link_to '<i class="fa fa-sticky-note"></i> Notes list'.html_safe, user_notes_url(user_id) %></li>
         <!-- Collections view -->
         <li><%= link_to '<i class="fa fa-book"></i> Collections list'.html_safe, user_notes_url(user_id) %></li>
         <!-- /Collections view -->
         <!-- Friends view -->
-        <li><%= link_to '<i class="fa fa-address-book"></i> Friends list'.html_safe, user_notes_url(user_id) %>
-        </li>
+        <li><%= link_to '<i class="fa fa-address-book"></i> Friends list'.html_safe, user_notes_url(user_id) %></li>
         <!-- /Friends view -->  
-        <!-- Edit view -->
-        <li><%= link_to '<i class="fa fa-pencil"></i> Edit profile'.html_safe, edit_user_path(user_id)  %>
-        </li>
-        <!-- /Edit view -->  
       </ul>
     </div>
-    <div>
+    <div style="text-align: center">
       <%= link_to 'Log Out', '/logout', class: "button-primary"  %>
     </div>
   </div>

@@ -1,14 +1,29 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Users Managment</h1>
 
 <div id="users">
   <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+    <div class="user-card">
+      <div class="user-info">
+      <h2>
+      <% if user.admin %>
+        <i class="fa-solid fa-user-shield fa-xl"></i>
+      <% else %>
+        <i class="fa-solid fa-user fa-2xl"></i>
+      <% end %>
+      </h2>
+      <h2 style="padding-left: 20px">
+        <%= user.username %> |
+        Notes: <%= count_notes_user(user.id) %>
+      </h2>
+      
+      </div>
+      <div class="user-bottons">
+        <%= button_to '<i class="fa-solid fa-user-pen"></i>'.html_safe, user_path(user.id), method: :get, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-sticky-note"></i>'.html_safe, user_notes_url(user.id), method: :get,  class: "button-primary"%>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New user", new_user_path %>

@@ -15,6 +15,10 @@ module NotesHelper
     admin
   end
 
+  def count_notes_user(user_id)
+    nnotes = Note.where(user_id: user_id).count
+  end
+
   # def get_users_to_edit(note_id)
   #   note = Note.find(note_id)
   #   note.note_permission.user - Array.wrap(note.user)

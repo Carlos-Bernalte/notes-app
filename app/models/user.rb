@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    before_create :set_default_admin
     has_many :notes, dependent: :destroy
     # has_many :friendships, dependent: :destroy
     # has_many :friends, :through => :friendships
@@ -10,5 +11,11 @@ class User < ApplicationRecord
     validates :email, presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+[a-z]+\z/i }, uniqueness: { case_sensitive: false }
     has_secure_password
     validates :password, length: { minimum: 8 }
-    before_save { self.admin = false }
+
+    private
+
+    def set_default_admin
+        self.admin ||= false
+    end
+    
 end

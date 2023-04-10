@@ -1,10 +1,34 @@
-<h1>Editing user</h1>
+<% user = User.find(params[:id]) %>
+<h1>Editing <%=user.username%> profile</h1>
 
-<%= render "form", user: @user %>
+<%= form_with scope: :user, model: user, local: true do |form| %>
 
-<br>
+  <div>
+    <%= form.label :username %><br>
+    <%= form.text_field :username%>
+  </div>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
-</div>
+  <div>
+    <%= form.label :email, style: "display: block; padding-top:10px" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label "New password", style: "display: block; padding-top:10px" %>
+    <%= form.password_field :password %>
+  </div>
+  <div>
+    <%= form.label "Confirm new password", style: "display: block; padding-top:10px" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+  <% if user_session_is_admin? %>
+    <div>
+    <%= form.label "Administrator" ,style: "display: block; padding-top:10px"%>
+    <%= form.check_box :admin, checked: user.admin %>
+    </div>
+  <% end %>
+  <div>
+    <%= form.submit class: "button-primary" %>
+  </div>
+<% end %>
+

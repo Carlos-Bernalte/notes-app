@@ -2,29 +2,33 @@
   <%= controller.redirect_to root_path %>
 <% else %>
   <p style="color: green"><%= notice %></p>
-  <h1>Notes</h1>
-  <% notes = find_notes(params[:user_id]) %>    
+  <% user = get_user_name(params[:user_id]) %>
+  <h1>Notes of <%= user.username %></h1>
+  <% if user_session_is_admin? %>
+    <%= link_to 'Back to users', users_url, class: "button-primary" %>
+  <% end %>
+  <% notes = find_notes(params[:user_id]) %>
+  <div class="contenedor-notes">
+  <%= button_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url(params[:user_id]),method: :get,  class: "add-note" %>
   <% notes.each_pair do |user_id, user_notes| %>
-    <div class="contenedor-notes">
-      <%= button_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url(params[:user_id]),method: :get,  class: "add-note" %>
-      <% user_notes.each do |note| %>
-        <div class="note">
-          <% if note.image%>
-            <img src="..." class="card-img-top" alt="...">
-          <% end %>  
-          <h3 class="note-title">
-            <%= note.title %>
-          </h3>
-          <p class="note-text">
-            <%= note.text %>
-          </p>
-          <div class="notes-options">
-            <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(user_id, note), method: :delete, class: "button-primary" %>
-            <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(user_id, note), method: :get, class: "button-primary" %>
-            <%= button_to '<i class="fa fa-share"></i>'.html_safe, edit_user_note_path(user_id, note), method: :get,  class: "button-primary"%>
-          </div>
+    <% user_notes.each do |note| %>
+      <div class="note">
+        <% if note.image%>
+          <img src="..." class="card-img-top" alt="...">
+        <% end %>  
+        <h3 class="note-title">
+          <%= note.title %>
+        </h3>
+        <p class="note-text">
+          <%= note.text %>
+        </p>
+        <div class="notes-options">
+          <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(user_id, note), method: :delete, class: "button-primary" %>
+          <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(user_id, note), method: :get, class: "button-primary" %>
+          <%= button_to '<i class="fa fa-share"></i>'.html_safe, edit_user_note_path(user_id, note), method: :get,  class: "button-primary"%>
         </div>
-      <% end %>
+      </div>
+    <% end %>
     </div>
   <% end %>
 <% end %>

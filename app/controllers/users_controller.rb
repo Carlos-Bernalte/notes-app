@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   # before_action :set_user, only: %i[ show edit update destroy ]
-
   # GET /users
   def index
     @users = User.all
@@ -32,10 +31,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      redirect_to @user, notice: "User was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+    if logged?
+      @user = User.find(params[:id])
+
+      if @user.update(user_params)
+        redirect_to users_path
+      else
+        render 'edit'
+      end
     end
   end
 
@@ -49,6 +52,9 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:username, :email, :password, :admin)
+  end
+  def set_default_admin
+    self.admin ||= false
   end
   
   def logged?
