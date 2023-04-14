@@ -1,0 +1,40 @@
+/* User */
+#users {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-top: 15px;
+  padding-right: 60%;
+}
+
+.user {
+  height: 100px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
+.user-card {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
+
+.user-info {
+  box-sizing: border-box;
+  display: flex;
+  padding: 20px;
+  width: 80%;
+}
+
+.user-bottons {
+  box-sizing: border-box;
+  display: flex;
+  padding: 20px;
+  width: 20%;
+}

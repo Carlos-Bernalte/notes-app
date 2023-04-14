@@ -1,5 +1,6 @@
 <% user = User.find(params[:id]) %>
-<h1>Editing <%=user.username%> profile</h1>
+
+<h2>Editing <span class="title-h2"><%=user.username%></span> profile</h2>
 
 <%= form_with scope: :user, model: user, local: true do |form| %>
 

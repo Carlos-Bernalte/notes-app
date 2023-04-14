@@ -3,6 +3,9 @@
 <% else %>
   <div>
     <% user = User.find(params[:id]) %>
+
+
+  <h2>Profile of: <span class="title-h2"><%=user.username%></span> </h2>
     <%= form_with scope: :user, model: user, local: true do |form| %>
       <p style=>
         <h2>

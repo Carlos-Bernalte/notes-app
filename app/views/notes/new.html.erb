@@ -24,17 +24,17 @@
     <%= form_with scope: :note, model: [ :user, @note ], local: true do |form| %>
     <p>
       <h3><%= form.label :title %></h3><br>
-      <%= form.text_field :title, style: 'height: 25px; border-radius: 10px';%>
+      <%= form.text_field :title%>
     </p>
 
     <p>
        <h3><%= form.label :text %></h3><br>
-      <%= form.text_area :text, style: 'height: 200px; border-radius: 10px;'%>
+      <%= form.text_area :text%>
     </p>
 
     <p>
       <h3><%= form.label :image %></h3><br>
-      <%= form.file_field :image %>
+      <%= form.file_field :image, class: "button-primary" %>
     </p>
     <br>
     <div>

@@ -1,102 +1,93 @@
-  
-  .col-md-3{
-    width: 23%;
-  }
-  
-  .center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+/* Notes */
 
-  .contenedor {
-    width: 90%;
-    margin: auto;
-    padding: 40px 0;  
-  }
+.container-notes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px 30px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.note{
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
 
-  .contenedor-notes {
-    width: auto;
+.note-title{
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 1rem;
+  border-bottom:1px solid #ffc900;
+}
 
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .note{
-    background-color: #feefc3;
-    margin: 1rem 1rem 1rem 1rem;
-    box-shadow: 5px 5px 8px grey;
+.note-text{
+  margin: .33rem 0rem 1rem 0rem;
+  height: 100;
+  overflow: hidden;
+}
+.note-show-button{
+  margin-top: auto;
+}
 
-    border-radius: 10px;
-    min-height: 100px;
-    padding: 10px;
-    position: relative;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center center;
+.add-note{
+  width: 172px;
+  height: 222px;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+  background-color: #ffc900;
+  color: #222;
+  font-size: x-large;
+}
+.add-note:hover{
+  background-color: #222;
+  color:#ffc900;
+  border:1px solid #ffc900;
+}
 
-  }
-  
-  .note-title{
-    font-size: 24px;
-    font-weight: bold;
-    padding-top: 1rem;
-  }
-  
-  .note-text{
-    margin: .33rem 0rem 1rem 0rem;
-    height: 100;
-    overflow: hidden;
-  }
-  
-  .note-image{
-    height: 80px;
-    width: 100px;
-    position: relative;
-    padding-top: 1rem;
-    padding-right: 1.5rem;
-  }
-  .note-actions{
-    padding-bottom: 1rem;
-  }
-  
-  
-  .with-margin{
-    margin: 1rem;
-  }
-  
-  .logout {
-    background-color: #FFC107;
-  
-  }
-  .logout:hover {
-    background-color: #cc9900;
-  }
-  
-  /* To title content */
-  .page-title{
-    width: 100%; 
-    padding: 10px 0; 
-    box-sizing: border-box;
-  }
-  
-  .title-left {
-    float: left; 
-    display: block; 
-    width: 100%
-  }
-  
-  .x_panel {
-    position: relative; 
-    width: 100%; 
-    margin-bottom: 10px; 
-    padding: 10px 17px; 
-    display: inline-block;
-    background: #fff;
-    border: 1px solid #E6E9ED;
-    border-radius: 15px;
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-    opacity: 1;
-    transition: all .2s ease;
-  }
+.notes-options {
+  display: flex;
+  align-items:flex-end;
+}
+
+/* Show note */
+
+.show-note-container{
+  display: grid;
+  grid-template-columns: 30% auto;
+  gap: 100px;
+  height: max-content;
+  margin-top: 20px;
+}
+
+.note-info-container{
+  height: max-content;
+}
+
+.note-info-text{
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  min-height: 200px;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
+
+.note-info-image{
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #ffc900;
+  border-radius: 15px;
+}
+

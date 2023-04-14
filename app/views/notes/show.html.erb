@@ -1,10 +1,29 @@
-<p style="color: green"><%= notice %></p>
+<h2>
+  Information about: <span class="title-h2"><%= @note.title %></span>
+</h2>
+<div class="show-note-container">
+  <div class="note-info-container">
 
-<%= render @note %>
-
-<div>
-  <%= link_to "Edit this note",{ controller: 'notes', action: 'edit', id: @note }, class: 'btn btn-info' %> |
-  <%= link_to "Back to notes", user_notes_path %>
-
+    <p class="note-info-text">
+      <%= @note.text %>
+    </p>
+    
+     <div class="notes-options">
+        <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(:user_id, @note), method: :delete, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(:user_id, @note), method: :get, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-share"></i>'.html_safe, edit_user_note_path(:user_id, @note), method: :get,  class: "button-primary"%>
+    </div>
+  </div>
+  <div>
+    
+  <% if @note.image %>
+    <h3>
+        Image:
+    </h3>
+     <%= image_tag(@note.image.url, alt: 'Image', class: 'note-info-image') if @note.image? %>
+    <% else%>
+      Not image attached
+    <% end %> 
+  </div>
 </div>
 

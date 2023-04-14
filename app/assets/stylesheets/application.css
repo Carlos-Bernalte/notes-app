@@ -28,6 +28,13 @@ p{
   padding-top: 10px;
 }
 
+.title-h2{
+  font-size: 36px;
+  font-weight: bold;
+  color: #ffc900;
+  padding-top: 1rem;
+}
+
 .button-primary{
   border-radius: 10px;
   font-size: 14px;
@@ -56,89 +63,18 @@ p{
   color: #d00000;
 }
 
-/* Notes */
-
-.contenedor-notes {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 30px 30px;
-  margin-bottom: 15px;
-  margin-top: 15px;
-}
-.note{
-  height: 200px;
-  width: 150px;
-  padding: 10px;
-  border: 1px solid #ffc900;
-  border-radius: 15px;
+#text_field input{
+  height: 25px; 
+  border-radius: 10px;
 }
 
-.add-note{
-  width: 172px;
-  height: 222px;
-  padding: 10px;
-  border: 1px solid #ffc900;
-  border-radius: 15px;
-  background-color: #ffc900;
-  color: #222;
-  font-size: x-large;
+input[type="text"],
+input[type="password"],
+textarea {
+  padding: 5px;
+  height: 25px; 
+  border-radius: 10px;
 }
-.add-note:hover{
-  background-color: #222;
-  color:#ffc900;
-  border:1px solid #ffc900;
-}
-.note-title{
-  font-size: 24px;
-  font-weight: bold;
-  padding-top: 1rem;
-  border-bottom:1px solid #ffc900;
-}
-
-.note-text{
-  margin: .33rem 0rem 1rem 0rem;
-  height: 100;
-  overflow: hidden;
-}
-
-.notes-options {
-  display: flex;
-  align-items:flex-end;
-  float: right;
-}
-/* User */
-.user{
-  height: 100px;
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ffc900;
-  border-radius: 15px;
-}
-.user-card {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  border: 1px solid #ffc900;
-  border-radius: 15px;
-}
-
-.user-info {
-  box-sizing: border-box;
-  display: flex;
-  padding: 20px;
-  width: 80%;
-}
-
-.user-bottons {
-  box-sizing: border-box;
-  display: flex;
-  padding: 20px;
-  width: 20%;
-}
-
 /* Main area */
 #wrapper {
   display: grid;
@@ -147,17 +83,7 @@ p{
   height: max-content;
 }
 
-#sidebar{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  background-color: #222;
-  border-right:1px solid #ffc900;
-  padding-top: 10px;
-  font-size: 24px;  
-  text-align: center;
-  width: 250px;
-  height:100%;
-}
+
 #content {
   grid-column-start: 2;
   grid-column-end: 3;
@@ -177,13 +103,6 @@ p{
   transform: translate(-50%, 0%);
   padding-top: 100px;
 }
-#users {
-  display: flex;
-  flex-direction: column;;
-  flex-wrap: wrap;
-  gap: 30px;
-  padding-top: 15px;
-  padding-right: 60%;
-}
+
 
 /* PRUEBAS */
