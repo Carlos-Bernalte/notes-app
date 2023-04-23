@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :friendships
   resources :collection_notes
   resources :collections
   get 'logout' => 'session#destroy', :as => 'logout'
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :notes 
     resources :collections
+    resources :friendships, only: [:index, :create, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   

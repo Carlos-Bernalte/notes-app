@@ -21,24 +21,19 @@ class CollectionsController < ApplicationController
 
   # POST /collections
   def create
-
-    puts "-------------------------------CREATE COLLECTION----------------"
     @user = User.find(params[:user_id])
-    @collection = @user.collection.create(collection_params)
+    if params[:notes]
+      @collection = @user.collections.create(:name => params[:name], :notes => params[:notes])
+    else
+      @collection = @user.collections.create(:name => params[:name])
+    end
 
     if @collection.save
-      redirect_to user_collections_url(@user), notice: "Collection was successfully created."
+      flash[:notice] = "Collection created!"
+      redirect_to user_collections_url(@user.id)
     else
-      render :new, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /collections/1
-  def update
-    if @collection.update(collection_params)
-      redirect_to user_collections_url(:user_id), notice: "Collection was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+      flash[:alert] = "Collection not saved!"
+      redirect_to user_collections_url(@user.id)
     end
   end
 

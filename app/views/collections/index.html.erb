@@ -3,7 +3,7 @@
 <h2>Collections of <span class="title-h2"><%=user.username%></span></h2>
 
 <p style="color: green"><%= notice %></p>
-
+<p style="color: green"><%= alert %></p>
 <%= form_with(model: @collection, url: user_collections_path, method: :post) do |form| %>
   <%= form.label :name %>
   <%= form.text_field :name %>
@@ -23,7 +23,7 @@
       
       </div>
       <div class="user-bottons">
-        <%= button_to '<i class="fa-solid fa-user-pen"></i>'.html_safe, new_user_collection_path(params[:user_id]), method: :get, class: "button-primary" %>
+        <%= button_to '<i class="fa-solid fa-eye"></i>'.html_safe, user_collection_path(params[:user_id], collection.id), method: :get, class: "button-primary" %>
         <%= button_to '<i class="fa fa-trash"></i>'.html_safe, user_collection_path(:user_id, collection), method: :delete, class: "button-primary" %>
       </div>
     </div>

@@ -27,10 +27,13 @@
        <h3><%= form.label :text %></h3><br>
       <%= form.text_area :text, style: 'padding: 5px; height: 200px; border-radius: 10px;'%>
     </p>
-
     <p>
       <h3><%= form.label :image %></h3><br>
       <%= form.file_field :image %>
+    </p>
+    <p>
+      <h3><%= form.label :collection %></h3><br>
+      <%= select_tag :collection, options_for_select([['Option 1', '1'], ['Option 2', '2'], ['Option 3', '3']]), prompt: 'Choose a collection' %>
     </p>
     <br>
     <div>

@@ -1,10 +1,11 @@
-<p style="color: green"><%= notice %></p>
+<% user = User.find(params[:user_id]) %>
+<% collection = Collection.find(params[:id]) %>
+<%= form_with scope: :collection, model: collection, local: true do |form| %>
+  <h2>
+    Collection <span class="title-h2"><%= collection.name %></span> of user <span class="title-h2"><%= user.username %></span>
+  </h2>
+  <p style="color: green"><%= notice %></p>
+  <p style="color: red"><%= alert %></p>
+      
+<% end %>
 
-<%= render @collection %>
-
-<div>
-  <%= link_to "Edit this collection", edit_collection_path(@collection) %> |
-  <%= link_to "Back to collections", collections_path %>
-
-  <%= button_to "Destroy this collection", @collection, method: :delete %>
-</div>

@@ -17,17 +17,21 @@
         </h2>
       </p>
       <p>
-        <%= form.label :username %><br>
-        <%= form.text_field :username, :disabled => true%>
+        <h3>
+          Username: <%= user.username%>
+        </h3>
       </p>
       <p>
-        <%= form.label :email %><br>
-        <%= form.text_field :email, :disabled => true%>
+        <h3>
+          Email: <%= user.email%>
+        </h3>
       </p>
+      <p>
       <h3>
         <%= form.label "Number of notes: ", style:"padding-top: 15px" %>
         <%= count_notes_user(params[:id]) %>
       </h3>
+      </p>
     <% end %>
     <br>
     <p>

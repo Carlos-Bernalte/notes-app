@@ -1,0 +1,50 @@
+<% user = get_user_name(params[:user_id]) %>
+<h2>Friendships Mangment of <span class="title-h2"><%=user.username%></span></h2>
+<p style="color: green; padding:10 px "><%= notice %></p>
+<p style="color: red; padding:10 px "><%= alert %></p>
+<% friendships = get_friendships(params[:user_id], 'pending') %>
+<% if !friendships.empty? %>
+<div id="friends-requests">
+  <h3 style="padding-bottom: 15px;">Requests:</h3>
+  <div class="friends-container">
+    <% friendships.each do |friendship| %>
+      <%friend = get_user_name(friendship.user_id)%>
+      <div class="friend">
+        <div class="friend-title">
+          <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
+        </div>
+        <div class="friend-bottons">
+        <%= button_to '<i class="fa-solid fa-circle-check"></i>'.html_safe, user_friendship_path(:user_id => friendship.user_id, :id => friendship.id, :status => 'confirmed'), method: :put, class: "button-primary" %>
+        <%= button_to '<i class="fa-solid fa-xmark"></i>'.html_safe, user_friendship_path(user.id, friendship.id), method: :delete,  class: "button-primary"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+<div id="friends">
+  <h3>Friends list: </h3>
+
+  <%= form_with(model: @user, url: user_friendships_path, method: :post) do |form| %>
+    <%= form.text_field :name, placeholder: 'Search for an user' %>
+
+    <%= form.submit 'Send invitation', class: "button-primary" %>
+  <% end %>
+
+    <% friendships = get_friendships(params[:user_id], 'confirmed') %>
+
+    <div class="friends-container">
+    <% friendships.each do |friendship| %>
+      <%friend = get_user_name(friendship.user_id)%>
+      <div class="friend">
+        <div class="friend-title">
+          <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
+        </div>
+        <div class="friend-bottons">
+          <%= button_to '<i class="fa fa-trash"></i>'.html_safe, user_friendship_url(user.id, friendship.id), method: :delete,  class: "button-primary"%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
