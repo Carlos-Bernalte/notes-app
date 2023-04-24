@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   post 'login' => 'session#create'
   delete 'users/:user_id/notes/:id', to: 'notes#destroy', as: 'destroy_user_note'
   resources :users do
-    resources :notes 
+    resources :notes do
+      get 'share' => 'notes#share', :as => 'share'
+      post 'share_with_friend' => 'notes#share_with_friend'
+      post 'unshare_with_friend' => 'notes#unshare_with_friend'
+    end
     resources :collections
     resources :friendships, only: [:index, :create, :update, :destroy]
   end

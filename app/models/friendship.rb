@@ -11,8 +11,8 @@ class Friendship < ApplicationRecord
 	private
 
 	def autofriendship
-		if user.equal?(friend)
-			errors.add(:friend, "You can't follow yourself")
+		if user.id.equal?(friend.id)
+			errors.add(:alert, "You can't follow yourself")
 		end 
 	end
 end

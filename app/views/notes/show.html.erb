@@ -1,6 +1,7 @@
 <h2>
   Information about: <span class="title-h2"><%= @note.title %></span>
 </h2>
+<% user = get_user_name(params[:user_id]) %>
 <div class="show-note-container">
   <div class="note-info-container">
 
@@ -9,17 +10,17 @@
     </p>
     
      <div class="notes-options">
-        <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path(:user_id, @note), method: :delete, class: "button-primary" %>
-        <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(:user_id, @note), method: :get, class: "button-primary" %>
-        <%= button_to '<i class="fa fa-share"></i>'.html_safe, edit_user_note_path(:user_id, @note), method: :get,  class: "button-primary"%>
+        <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path({note_id: @note.id, user_id: user.id}), method: :delete, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(user.id, @note), method: :get, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_share_path(user.id, @note), method: :get,  class: "button-primary"%>
+        <%= button_to '<i class="fa-solid fa-rotate-left"></i>'.html_safe , user_notes_path(params[:user_id]), :method => :get, class: "button-primary" %>
     </div>
   </div>
   <div>
-    
-  <% if @note.image %>
     <h3>
         Image:
     </h3>
+  <% if @note.image? %>
      <%= image_tag(@note.image.url, alt: 'Image', class: 'note-info-image') if @note.image? %>
     <% else%>
       Not image attached

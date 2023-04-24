@@ -32,7 +32,8 @@ class NotesController < ApplicationController
     @note = @user.notes.create(note_params)
 
     if @note.save
-      redirect_to user_notes_url(@user), notice: "Note was successfully created."
+      np = NotePermission.create({user_id:@user.id, note_id: @note.id})
+      redirect_to user_notes_url(@user)
     else
       render :new, status: :unprocessable_entity
     end
@@ -57,12 +58,32 @@ class NotesController < ApplicationController
   def destroy
     puts "-------------------------------DELETE NOTE----------------"
     if logged?
-      @note = Note.find(params[:id])
-      @user = User.find(@note.user_id)
-      @note.destroy
+      note = Note.find(params["note_id"])
+      
+      note.destroy
 
-      redirect_to user_notes_url(@user)
+      redirect_to user_notes_url(params["user_id"])
     end
+  end
+
+  def share
+    @note = Note.find(params["note_id"])
+    @note_permission = @note.note_permission
+  end
+
+  def share_with_friend
+    
+    note = Note.find(params["note_id"])
+    friend_to_share = User.find(params["friend_id"])
+    np = NotePermission.create({user_id:friend_to_share.id, note_id: note.id})
+    redirect_to user_note_share_path(params["user_id"], note)
+  end
+
+  def unshare_with_friend
+    note = Note.find(params["note_id"])
+    note_permission = note.note_permission
+    note_permission.user.delete(User.find(params[:friend_id]))
+    redirect_to user_note_share_url(note)
   end
 
   private

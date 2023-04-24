@@ -29,6 +29,7 @@
   margin: .33rem 0rem 1rem 0rem;
   height: 100;
   overflow: hidden;
+  overflow-wrap: break-word;
 }
 .note-show-button{
   margin-top: auto;
@@ -67,6 +68,8 @@
 
 .note-info-container{
   height: max-content;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .note-info-text{

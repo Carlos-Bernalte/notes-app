@@ -19,15 +19,15 @@ module NotesHelper
     nnotes = Note.where(user_id: user_id).count
   end
 
-  # def get_users_to_edit(note_id)
-  #   note = Note.find(note_id)
-  #   note.note_permission.user - Array.wrap(note.user)
-  # end
+  def get_users_to_edit(note_id)
+    note = Note.find(note_id)
+    note.note_permission.user_id - Array.wrap(note.user)
+  end
 
-  # def get_users_cant_edit(note_id)
-  #   note = Note.find(note_id)
-  #   User.where.not(id: note.note_permission.user_ids)
-  # end
+  def get_users_cant_edit(note_id)
+    note = Note.find(note_id)
+    User.where.not(id: note.note_permission.user_ids)
+  end
 
   def logged?
     session[:username]

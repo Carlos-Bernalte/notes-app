@@ -1,9 +1,10 @@
-<div >
-  <div>
-    <h2 >Edit note</h2> 
-  </div>              
-  <!-- /Row with title -->
-  <div>
+
+<div>
+  <h2 >Edit note: <span class="title-h2"><%= @note.title %></span></h2> 
+</div>              
+<!-- /Row with title -->
+<div class="show-note-container">
+  <div class="note-info-container">
     <%= form_with(scope: :note, model: [ :user, @note ], local: true) do |form| %>
     <% if @note.errors.any? %>
     <div id="error_explanation" class="alert alert-danger">
@@ -24,13 +25,15 @@
     </p>
 
     <p>
-       <h3><%= form.label :text %></h3><br>
+        <h3><%= form.label :text %></h3><br>
       <%= form.text_area :text, style: 'padding: 5px; height: 200px; border-radius: 10px;'%>
     </p>
     <p>
       <h3><%= form.label :image %></h3><br>
       <%= form.file_field :image %>
     </p>
+
+    
     <p>
       <h3><%= form.label :collection %></h3><br>
       <%= select_tag :collection, options_for_select([['Option 1', '1'], ['Option 2', '2'], ['Option 3', '3']]), prompt: 'Choose a collection' %>
@@ -42,8 +45,9 @@
     </div>
 
     <% end %>
-     
+      
   </div>
- 
+
 </div>
+
 

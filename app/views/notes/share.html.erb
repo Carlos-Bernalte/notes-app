@@ -1,0 +1,41 @@
+<div>
+  <h2 >Sharing Mangment of note: <span class="title-h2"><%= @note.title %></span></h2> 
+</div>
+<% user = get_user_name(params[:user_id]) %>
+
+<h3>Users that have access: </h3>
+<div class="friends-container">
+  <% friendships = get_friendships(params[:user_id], 'confirmed') %>
+  <% friendships.each do |friendship| %>
+    <%friend = find_user(params[:user_id], friendship)%>
+    <div class="friend">
+      <div class="friend-title">
+        <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
+      </div>
+      <div class="friend-bottons">
+        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_unshare_with_friend_path({note_id: @note.id, user_id: user.id, friend_id: friend.id}), :method => :post,  class: "button-primary"%>
+      </div>
+    </div>
+  <% end %>
+  
+</div>
+
+<h3>Share note: </h3>
+<div class="friends-container">
+  <% friendships = get_friendships(params[:user_id], 'confirmed') %>
+  <% friendships = get_users_to_edit(@note.id) %>
+  <% friendships.each do |friendship| %>
+    
+    <%friend = find_user(params[:user_id], friendship)%>
+    <div class="friend">
+      <div class="friend-title">
+        <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
+      </div>
+      <div class="friend-bottons">
+        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_share_with_friend_path({note_id: @note.id, user_id: user.id, friend_id: friend.id}), :method => :post,  class: "button-primary"%>
+      </div>
+    </div>
+  <% end %>
+  
+</div>
+<%= button_to '<i class="fa-solid fa-rotate-left"></i> Back'.html_safe , user_note_path(params[:user_id], @note.id), :method => :get, class: "button-primary" %>

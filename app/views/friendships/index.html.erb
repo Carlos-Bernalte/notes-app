@@ -14,7 +14,7 @@
           <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
         </div>
         <div class="friend-bottons">
-        <%= button_to '<i class="fa-solid fa-circle-check"></i>'.html_safe, user_friendship_path(:user_id => friendship.user_id, :id => friendship.id, :status => 'confirmed'), method: :put, class: "button-primary" %>
+        <%= button_to '<i class="fa-solid fa-circle-check"></i>'.html_safe, user_friendship_path(:user_id => user.id, :id => friendship.id, :status => 'confirmed'), method: :put, class: "button-primary" %>
         <%= button_to '<i class="fa-solid fa-xmark"></i>'.html_safe, user_friendship_path(user.id, friendship.id), method: :delete,  class: "button-primary"%>
         </div>
       </div>
@@ -30,12 +30,12 @@
 
     <%= form.submit 'Send invitation', class: "button-primary" %>
   <% end %>
-
-    <% friendships = get_friendships(params[:user_id], 'confirmed') %>
-
+    
     <div class="friends-container">
+    <% friendships = get_friendships(params[:user_id], 'confirmed') %>
     <% friendships.each do |friendship| %>
-      <%friend = get_user_name(friendship.user_id)%>
+  
+      <%friend = find_user(params[:user_id], friendship)%>
       <div class="friend">
         <div class="friend-title">
           <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
