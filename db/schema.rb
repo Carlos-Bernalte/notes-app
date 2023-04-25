@@ -12,8 +12,8 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
   create_table "collection_notes", force: :cascade do |t|
-    t.integer "note_id", null: false
     t.integer "collection_id", null: false
+    t.integer "note_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["collection_id"], name: "index_collection_notes_on_collection_id"
@@ -22,7 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id", null: false
+    t.integer "notes"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_collections_on_user_id"
@@ -39,11 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
   end
 
   create_table "note_permissions", force: :cascade do |t|
-    t.integer "note_id", null: false
+    t.integer "note_id"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["note_id"], name: "index_note_permissions_on_note_id"
     t.index ["user_id"], name: "index_note_permissions_on_user_id"
   end
 
@@ -75,7 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
   add_foreign_key "collection_notes", "collections"
   add_foreign_key "collection_notes", "notes"
   add_foreign_key "collections", "users"
-  add_foreign_key "note_permissions", "notes"
   add_foreign_key "note_permissions", "users"
   add_foreign_key "notes", "users"
 end

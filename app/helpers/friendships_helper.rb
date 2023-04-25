@@ -8,6 +8,10 @@ module FriendshipsHelper
 		end
 	end
 
+	def get_all_friendships(user_id)
+		Friendship.where(user_id: user_id).or(Friendship.where(friend_id: user_id)).where(status: 'confirmed')
+	end
+
 	def get_new_friendships(user_id)
 		users_ids = Friendship.where(user_id: user_id).pluck(:friend_id)
 		u = Friendship.where(friend_id: user_id).pluck(:user_id)
@@ -33,6 +37,10 @@ module FriendshipsHelper
 
 	def get_user_id(username)
 		user = User.find_by(username: username).id
+	end
+
+	def is_friend(user_id, friend_id)
+		Friendship.where(friend_id: friend_id, user_id: user_id).or(Friendship.where(user_id: friend_id, friend_id: user_id))
 	end
 
   	

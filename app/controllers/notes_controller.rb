@@ -39,6 +39,7 @@ class NotesController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /notes/1
   def update
     puts "-------------------------------UPDATE NOTE----------------"
@@ -80,11 +81,17 @@ class NotesController < ApplicationController
   end
 
   def unshare_with_friend
-    note = Note.find(params["note_id"])
-    note_permission = note.note_permission
-    note_permission.user.delete(User.find(params[:friend_id]))
-    redirect_to user_note_share_url(note)
+
+    NotePermission.where(note_id: params["note_id"], user_id: params["friend_id"]).destroy_all
+    
+    redirect_to user_note_share_url(params["user_id"],params["note_id"])
   end
+ # def unshare_with_friend
+
+  #   note_permission = NotePermission.where(note_id: params["note_id"], user_id: params["friend_id"])
+  #   note_permission.delete
+  #   redirect_to user_note_share_url(params["user_id"],params["note_id"])
+  # end
 
   private
 

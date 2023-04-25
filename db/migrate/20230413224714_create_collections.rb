@@ -3,7 +3,7 @@ class CreateCollections < ActiveRecord::Migration[7.0]
     create_table :collections do |t|
       t.string :name
       t.integer :notes, array: true, default: []
-      t.references :user, null: false, foreign_key: true
+      t.references :user, foreign_key: true
 
       t.timestamps
     end

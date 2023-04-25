@@ -21,13 +21,14 @@ module NotesHelper
 
   def get_users_to_edit(note_id)
     note = Note.find(note_id)
-    note.note_permission.user_id - Array.wrap(note.user)
+    note.note_permission.user - Array.wrap(note.user)
+    
   end
 
-  def get_users_cant_edit(note_id)
-    note = Note.find(note_id)
-    User.where.not(id: note.note_permission.user_ids)
+  def have_permission(note_id, user_id)
+    NotePermission.where(note_id: note_id, user_id: user_id)
   end
+
 
   def logged?
     session[:username]

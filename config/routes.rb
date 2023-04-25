@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :notes do
       get 'share' => 'notes#share', :as => 'share'
       post 'share_with_friend' => 'notes#share_with_friend'
-      post 'unshare_with_friend' => 'notes#unshare_with_friend'
+      delete 'unshare_with_friend' => 'notes#unshare_with_friend'
     end
     resources :collections
     resources :friendships, only: [:index, :create, :update, :destroy]

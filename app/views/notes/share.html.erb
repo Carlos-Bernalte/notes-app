@@ -3,30 +3,31 @@
 </div>
 <% user = get_user_name(params[:user_id]) %>
 
-<h3>Users that have access: </h3>
+<h3>Friends that have access: </h3>
 <div class="friends-container">
-  <% friendships = get_friendships(params[:user_id], 'confirmed') %>
+  <% friendships = get_all_friendships(user.id) %>
   <% friendships.each do |friendship| %>
-    <%friend = find_user(params[:user_id], friendship)%>
+    <%friend = find_user(user.id, friendship)%>
+    <% if have_permission(@note.id, friend.id).present?%>
     <div class="friend">
       <div class="friend-title">
         <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
       </div>
       <div class="friend-bottons">
-        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_unshare_with_friend_path({note_id: @note.id, user_id: user.id, friend_id: friend.id}), :method => :post,  class: "button-primary"%>
+        <%= button_to '<i class="fa-solid fa-xmark"></i>'.html_safe, user_note_unshare_with_friend_path({note_id: @note.id, user_id: user.id, friend_id: friend.id}), :method => :delete,  class: "button-primary"%>
       </div>
     </div>
+  <% end %>
   <% end %>
   
 </div>
 
 <h3>Share note: </h3>
 <div class="friends-container">
-  <% friendships = get_friendships(params[:user_id], 'confirmed') %>
-  <% friendships = get_users_to_edit(@note.id) %>
+  <% friendships = get_all_friendships(user.id) %>
   <% friendships.each do |friendship| %>
-    
-    <%friend = find_user(params[:user_id], friendship)%>
+    <%friend = find_user(user.id, friendship)%>
+    <% if !have_permission(@note.id, friend.id).present?%>
     <div class="friend">
       <div class="friend-title">
         <i class="fa-solid fa-user fa-2xl"></i> <%=friend.username%>
@@ -35,6 +36,7 @@
         <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_share_with_friend_path({note_id: @note.id, user_id: user.id, friend_id: friend.id}), :method => :post,  class: "button-primary"%>
       </div>
     </div>
+  <% end %>
   <% end %>
   
 </div>
