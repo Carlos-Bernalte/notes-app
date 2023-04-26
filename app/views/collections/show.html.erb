@@ -1,11 +1,29 @@
 <% user = User.find(params[:user_id]) %>
 <% collection = Collection.find(params[:id]) %>
-<%= form_with scope: :collection, model: collection, local: true do |form| %>
   <h2>
     Collection <span class="title-h2"><%= collection.name %></span> of user <span class="title-h2"><%= user.username %></span>
   </h2>
   <p style="color: green"><%= notice %></p>
   <p style="color: red"><%= alert %></p>
+
+  <div class="container-notes">
+  <% collection_notes = find_collection_notes(collection.id) %>
+
+    <% collection_notes.each do |collection_note| %>
+      <% note = find_note(collection_note.note_id) %>
+      <div class="note">
+        <h3 class="note-title">
+          <%= note.title %>
+        </h3>
+        <p class="note-text">
+          <%= note.text %>
+        </p>
+        <div class="note-show-button">
+          <%= button_to '<i class="fa-solid fa-eye"></i>'.html_safe, user_note_path(user.id, note), method: :get, class: "button-primary", style:"width:95%" %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
       
-<% end %>
 

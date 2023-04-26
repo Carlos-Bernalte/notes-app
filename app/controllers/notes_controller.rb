@@ -60,7 +60,7 @@ class NotesController < ApplicationController
     puts "-------------------------------DELETE NOTE----------------"
     if logged?
       note = Note.find(params["note_id"])
-      
+      CollectionNote.where(note_id: note).destroy_all
       note.destroy
 
       redirect_to user_notes_url(params["user_id"])
@@ -69,7 +69,7 @@ class NotesController < ApplicationController
 
   def share
     @note = Note.find(params["note_id"])
-    @note_permission = @note.note_permission
+    @note_permission = @note.note_permissions
   end
 
   def share_with_friend

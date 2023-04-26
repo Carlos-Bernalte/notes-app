@@ -41,13 +41,33 @@ class CollectionsController < ApplicationController
   def destroy
     puts "-------------------------------DELETE COLLECTION----------------"
     if logged?
-      @collection = Collection.find(params[:id])
-      @user = User.find(@collection.user_id)
-      @collection.destroy
+      collection = Collection.find(params['id'])
+      user = User.find(collection.user_id)
+      CollectionNote.where(collection_id: collection.id).destroy_all
+      collection.destroy
 
-      redirect_to user_collections_url(@user), notice: "Collection was successfully destroyed."
+      redirect_to user_collections_url(user), notice: "Collection was successfully destroyed."
     end
   end
+
+  def add_note
+    puts "-------------------------------ADD NOTE TO COLLECTION----------------"
+    if logged?
+      CollectionNote.create(:collection_id => params['collection_id'], :note_id => params['note_id'])
+      
+      redirect_to edit_user_note_path(params['user_id'], params['note_id'])
+    end
+  end
+
+  def delete_note
+    puts "-------------------------------DELETE NOTE TO COLLECTION----------------"
+    if logged?
+      CollectionNote.where(:collection_id => params['collection_id'], :note_id => params['note_id']).destroy_all
+
+      redirect_to edit_user_note_path(params[:user_id], params[:note_id])
+    end
+  end
+
 
   private
 

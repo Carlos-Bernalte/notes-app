@@ -3,11 +3,13 @@
 <% else %>
   <p style="color: green"><%= notice %></p>
   <% user = get_user_name(params[:user_id]) %>
+  <div>
   <h2>Notes of <span class="title-h2"><%=user.username%></span></h2>
-  <% if user_session_is_admin? %>
+  <% if user_session_is_admin?%>
     <%= link_to 'Back to users', users_url, class: "button-primary" %>
   <% end %>
   <% notes = find_notes(params[:user_id]) %>
+  <% shared_notes = find_shared_notes(params[:user_id]) %>
   <div class="container-notes">
   <%= button_to '<i class="fa fa-plus"></i>'.html_safe, new_user_note_url(params[:user_id]),method: :get,  class: "add-note" %>
   <% notes.each_pair do |user_id, user_notes| %>
@@ -26,5 +28,28 @@
       
     <% end %>
     </div>
+  <% end %>
+  </div>
+  <% if shared_notes.present? %>
+  <div style="padding-top: 25px">
+  
+  <h2>Shared notes</h2>
+  <div class="container-notes">
+    <% shared_notes.each do |note| %>
+      <div class="note">
+        <h3 class="note-title">
+          <%= note.title %>
+        </h3>
+        <p class="note-text">
+          <%= note.text %>
+        </p>
+        <div class="note-show-button">
+          <%= button_to '<i class="fa-solid fa-eye"></i>'.html_safe, user_note_path(user.id, note), method: :get, class: "button-primary", style:"width:95%" %>
+        </div>
+      </div>
+      
+    <% end %>
+    </div>
+  </div>
   <% end %>
 <% end %>

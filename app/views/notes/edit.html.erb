@@ -33,11 +33,7 @@
       <%= form.file_field :image %>
     </p>
 
-    
-    <p>
-      <h3><%= form.label :collection %></h3><br>
-      <%= select_tag :collection, options_for_select([['Option 1', '1'], ['Option 2', '2'], ['Option 3', '3']]), prompt: 'Choose a collection' %>
-    </p>
+
     <br>
     <div>
       <%= form.submit class: "button-primary" %>
@@ -46,6 +42,30 @@
 
     <% end %>
       
+  </div>
+  <div >
+    <h3 >Add to a collection:</h3>
+    <div id="collection">
+     <%collections = find_collections(params[:user_id])%>
+     <% collections.each do |collection| %>
+      <div class="collection-card">
+        <div class="collection-info">
+          <h3>
+            <i class="fa fa-book fa-xl"></i>
+            <%= collection.name %>
+          </h3>
+        
+        </div>
+        <div>
+          <%if !belong_to_collection(collection.id, @note.id).present? %>
+            <%= button_to '<i class="fa fa-plus"></i>'.html_safe, user_collection_add_note_path({note_id: @note.id, user_id: params[:user_id], collection_id: collection.id}), method: :post, class: "button-primary" %> 
+          <%else%>
+           <%= button_to '<i class="fa-solid fa-xmark"></i>'.html_safe, user_collection_delete_note_path({note_id: @note.id, user_id: params[:user_id], collection_id: collection.id}), method: :delete, class: "button-primary" %> 
+          <%end%>
+        </div>
+      </div>
+  <% end %>
+  </div>
   </div>
 
 </div>

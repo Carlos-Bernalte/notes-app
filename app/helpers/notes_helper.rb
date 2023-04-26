@@ -8,9 +8,20 @@ module NotesHelper
     notes = notes.group_by(&:user_id)        
   end
 
+  def find_shared_notes(user_id)
+    Note.joins(:note_permissions)
+    .where("note_permissions.user_id = ? AND notes.user_id != ?", user_id, user_id)
+ 
+  end
+  def find_note(note_id)
+
+    Note.find(note_id)
+      
+  end
+
   def user_session_is_admin?
     if logged?
-      admin = User.where(user_name: session[:username]).first.admin
+      admin = User.where(username: session[:username]).first.admin
     end
     admin
   end
@@ -19,11 +30,6 @@ module NotesHelper
     nnotes = Note.where(user_id: user_id).count
   end
 
-  def get_users_to_edit(note_id)
-    note = Note.find(note_id)
-    note.note_permission.user - Array.wrap(note.user)
-    
-  end
 
   def have_permission(note_id, user_id)
     NotePermission.where(note_id: note_id, user_id: user_id)

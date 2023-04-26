@@ -9,5 +9,3 @@ User.create(username: "root",email: "root@email.com", password: "asdfasdf", admi
 User.create(username: "test",email: "test@email.com", password: "asdfasdf")
 User.create(username: "user",email: "user@email.com", password: "asdfasdf")
 User.create(username: "carlos",email: "carlos@email.com", password: "asdfasdf")
-
-Note.create()

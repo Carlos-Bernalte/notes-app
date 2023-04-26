@@ -12,7 +12,10 @@ Rails.application.routes.draw do
       post 'share_with_friend' => 'notes#share_with_friend'
       delete 'unshare_with_friend' => 'notes#unshare_with_friend'
     end
-    resources :collections
+    resources :collections do
+      post 'add_note' => 'collections#add_note'
+      delete 'delete_note' => 'collections#delete_note'
+    end
     resources :friendships, only: [:index, :create, :update, :destroy]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -10,10 +10,12 @@
     </p>
     
      <div class="notes-options">
+      <% if user.id ==  @note.user_id%>
         <%= button_to '<i class="fa fa-trash"></i>'.html_safe, destroy_user_note_path({note_id: @note.id, user_id: user.id}), method: :delete, class: "button-primary" %>
-        <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(user.id, @note), method: :get, class: "button-primary" %>
-        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_share_path(user.id, @note), method: :get,  class: "button-primary"%>
-        <%= button_to '<i class="fa-solid fa-rotate-left"></i>'.html_safe , user_notes_path(params[:user_id]), :method => :get, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-gear"></i>'.html_safe, edit_user_note_path(params[:user_id], @note), method: :get, class: "button-primary" %>
+        <%= button_to '<i class="fa fa-share"></i>'.html_safe, user_note_share_path(params[:user_id], @note), method: :get,  class: "button-primary"%>
+      <% end %>
+        <%= link_to '<i class="fa-solid fa-rotate-left"></i>'.html_safe , :back, class: "button-primary" %>
     </div>
   </div>
   <div>

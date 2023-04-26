@@ -10,19 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_24_183742) do
   create_table "collection_notes", force: :cascade do |t|
-    t.integer "collection_id", null: false
-    t.integer "note_id", null: false
+    t.integer "collection_id"
+    t.integer "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["collection_id"], name: "index_collection_notes_on_collection_id"
-    t.index ["note_id"], name: "index_collection_notes_on_note_id"
   end
 
   create_table "collections", force: :cascade do |t|
     t.string "name"
-    t.integer "notes"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,12 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
     t.index ["user_id"], name: "index_note_permissions_on_user_id"
   end
 
-  create_table "note_permissions_users", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "note_permission_id"
-    t.index ["user_id", "note_permission_id"], name: "user_index"
-  end
-
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "text"
@@ -72,8 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_205349) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "collection_notes", "collections"
-  add_foreign_key "collection_notes", "notes"
   add_foreign_key "collections", "users"
   add_foreign_key "note_permissions", "users"
   add_foreign_key "notes", "users"
